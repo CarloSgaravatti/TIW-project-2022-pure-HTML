@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${session.language}">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>
+			Insert title here
+		</title>
+		<link rel="stylesheet" type="text/css" media="all" href="../css/mystyle.css" th:href="@{/css/mystyle.css}" />
+		<link rel="stylesheet" type="text/css" media="all" href="../css/documentsStyle.css" th:href="@{/css/documentsStyle.css}" />
+	</head>
+	<body>
+		<div class = "header">
+			<h1 th:text="#{headerName}"></h1>
+		</div>
+		
+		<div th:replace="WEB-INF/templates/fragments/navbar :: navbar(isHome='false')"></div>
+		
+		<th:block th:unless="${#lists.isEmpty(documents)}">
+			<p><span th:text="#{message}"></span><span th:text="${subdirectory.name}"></span></p>
+		
+			<table border="1">
+				<thead>
+					<tr>
+						<th th:text="#{documentNameHeader}"></th>
+						<th th:text="#{accessLinkHeader}"></th>
+						<th th:text="#{moveLinkHeader}"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="document, i : ${documents}" class="" th:class="${i.even} ? 'even'">
+						<td th:text="${document.name + document.documentType}"></td>
+						<td>
+							<a href="document.html" th:href="@{/AccessDocument(documentId=${document.documentId})}">
+			      				<span th:text="#{accessLink}"></span>
+			      			</a>
+			    		</td>
+						<td>
+			              	<a href="document.html" th:href="@{/MoveDocument(documentId=${document.documentId})}">
+			      				<span th:text="#{moveLink}"></span>
+			      			</a>
+		   				</td>
+					</tr>
+				</tbody>
+			</table>
+		</th:block>
+		
+		<p th:if="${#lists.isEmpty(documents)}" th:text="#{noDocuments}"></p>
+	</body>
+</html>

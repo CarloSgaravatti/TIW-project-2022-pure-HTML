@@ -1,0 +1,68 @@
+td#subdirectoryDate {
+	width: 20%;
+	text-align: right;
+	font-style: italic;
+}
+
+td#subdirectoryName {
+	width: 60%;
+	font-size: 16px;
+}
+
+td#subdirectoryName a {
+	text-decoration: none;	
+}
+
+td#subdirectoryName a:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+td#subdirectoryName input[type="submit"] {
+	color: black;
+	background-color: white;
+	background: none;
+	border: none;
+	padding: 0;
+}
+
+td#subdirectoryName input[type="submit"]:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+table#subdirectoryRow {
+	width: 80%;
+}
+
+.directoryUl {
+	margin: 0;
+	list-style-type: none;
+}
+
+.directoryLi {
+	padding: 10px 0 10px 40px;
+  	background-image: url('folder.png');
+  	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 25px;
+}
+
+
+.subdirectoryUl {
+	margin: 0;
+	list-style-type: none;
+	padding: 10px 0 10px 100px;
+}
+
+.subdirectoryLi {
+	padding: 2px 0 2px 40px;
+	background-image: url('folder_document.png');
+  	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 25px;
+}
+
+input[type=text]#pathForm{
+	width: 30%;
+}

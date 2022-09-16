@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>Insert title here</title>
+		<link rel="stylesheet" type="text/css" media="all" href="../css/mystyle.css" th:href="@{/css/indexStyle.css}" />
+		<link rel="stylesheet" type="text/css" media="all" href="../css/mystyle.css" th:href="@{/css/mystyle.css}" />
+	</head>
+	<body>
+		<h1 align = "center">Welcome to the document management application</h1>
+		
+		<div class = "loginContainer">
+		
+			<div class = "loginSection">
+				<div class = "sectionHeading">
+					<h2>Login</h2>
+				</div>
+				<form action = "Login" method = "post" id = "login">
+					<label>Username</label>
+					<input type = "text" name = "username" required><br>
+					<label>Password</label>
+					<input type = "password" name = "password" required><br>
+					<div class = "changeAutMethod">
+						<input type = "submit" value = "Login" id = "loginButton">
+						<p class = "changeAutMethodInfo">
+							Don't have an account? 
+							<a id = "registerAnchor" href = "Registration" th:href="@{/Registration}">Register</a>
+						</p>	
+					</div>
+				</form>
+			</div>
+			
+			<!-- <div class = "registrationSection">
+				<div class = "sectionHeading">
+						<h2>Registration</h2>
+					</div>
+				<form action = "Registration" method = "post" id = "registration">
+					<label>Username</label>
+					<input type = "text" name = "username" required><br>
+					<label>Email</label>
+					<input type = "email" name = "email" required><br>
+					<label>Password</label>
+					<input type = "password" name = "password" required><br>
+					<label>Repeat Password</label>
+					<input type = "password" name = "repeatedPassword" required><br>
+					<div class = "changeAutMethod">
+						<input type = "submit" value = "Registration" id = "registrationButton">
+						<a id = "loginAnchor" href = "Welcome" th:href="Welcome">Login</a>
+					</div>
+				</form>
+			</div>-->
+			
+		</div>
+	</body>
+</html>

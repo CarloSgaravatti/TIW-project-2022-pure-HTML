@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${session.language}" th:lang="${lang}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class=navbar th:fragment="navbar">
+		
+		<a th:href="@{/Logout}" th:text="#{logoutLink}"></a>
+		<a th:if="${not isHome}" th:href="@{/GoToPreviousPage}" th:text="#{previousPageLink}"></a>
+		<a th:if="${not isHome}" th:href="@{/GoToHome}" th:text="#{homePageLink}"></a>
+		<a th:if="${isHome}" th:href="@{/GoToContentCreation}" th:text="#{contentCreationLink}"></a>
+		
+		<div id = "languages">
+			<a th:href="@{/ChangeLanguage?lan=it}">&#x1F1EE;&#x1F1F9;</a>
+			<a th:href="@{/ChangeLanguage?lan=en}">&#x1F1EC;&#x1F1E7;</a>
+		</div>
+	</div>
+</body>
+</html>

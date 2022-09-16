@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${session.language}">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Insert title here</title>
+		<link rel="stylesheet" type="text/css" media="all" href="../css/mystyle.css" th:href="@{/css/mystyle.css}" />
+		<link rel="stylesheet" type="text/css" media="all" href="../css/mystyle.css" th:href="@{/css/createContentStyle.css}" />
+	</head>
+	<body>
+		<div class = "header">
+			<h1 th:text="#{headerName}"></h1>
+		</div>
+		
+		<div th:replace="WEB-INF/templates/fragments/navbar :: navbar(isHome='false')"></div>
+		
+		<div class = "formsSection">
+			
+			<div class = "directoriesFormSection">
+				<div class = "directoryForm">
+					<h3 th:text="#{directoryCreation}"></h3>
+					<form action = "CreateDirectory" method = "post">
+						<label for = "name" th:text="#{directoryNameLabel}"></label>
+						<input type = "text" name = "name" required><br>
+						<input type = "submit" value = "Create Directory" th:value="#{directoryButton}">
+					</form>
+				</div>
+				
+				<div class = "subdirectoryForm">
+					<h3 th:text="#{subdirectoryCreation}"></h3>
+					<p th:if="${#lists.isEmpty(directories)}" th:text="#{noDirectories}"></p>
+					<form th:unless="${#lists.isEmpty(directories)}" action = "CreateSubdirectory" method = "post" id="subdirectoryForm">
+						<label for = "name" th:text="#{subdirectoryNameLabel}"></label>
+						<input type = "text" name = "name" required><br>
+						<label for = "directoryId" th:text="#{directoryNameLabel}"></label>
+						<select name = "directoryId" form = "subdirectoryForm" required>
+							<option th:each="directory : ${directories}"
+			                    th:text="${directory.name}"
+			                    th:value="${directory.directoryId}">
+						</select><br>
+						<input type = "submit" value = "Create Subdirectory" th:value="#{subdirectoryButton}">
+					</form>
+				</div>
+			</div>
+			
+			<div class = "documentForm">
+				<h3 th:text="#{documentCreation}"></h3>
+				<p th:if="${#lists.isEmpty(subdirectories)}" th:text="#{noSubdirectories}"></p>
+				<form th:unless="${#lists.isEmpty(subdirectories)}" action = "CreateDocument" method = "post" id="documentForm">
+					<label for = "name" th:text="#{documentNameLabel}"></label>
+					<input type = "text" name = "name" required><br>
+					<label for = "type" th:text="#{documentTypeLabel}"></label>
+					<input type = "text" name = "type" required><br>
+					<label for = "summary" th:text="#{documentSummaryLabel}"></label><br>
+					<textarea name="summary" form="documentForm" rows="5" cols="50" required th:text="#{initialSummaryContent}"></textarea><br>
+					<label for = "subdirectoryId" th:text="#{subdirectoryNameLabel}"></label>
+					<select name = "subdirectoryId" form = "documentForm" required>
+						<option th:each="subdirectory : ${subdirectories}"
+		                    th:text="${subdirectory.name}"
+		                    th:value="${subdirectory.directoryId}">
+					</select><br>
+					<input type = "submit" value = "Create Document" th:value="#{documentButton}">
+				</form>
+			</div>		
+		
+		</div>
+		
+	</body>
+</html>

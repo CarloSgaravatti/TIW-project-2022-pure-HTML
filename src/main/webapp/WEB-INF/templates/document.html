@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${session.language}">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Insert title here</title>
+		<link rel="stylesheet" type="text/css" media="all" href="../css/mystyle.css" th:href="@{/css/mystyle.css}" />
+	</head>
+	<body>
+		<div class = "header">
+			<h1 th:text="#{headerName}"></h1>
+		</div>
+		
+		<div th:replace="WEB-INF/templates/fragments/navbar :: navbar(isHome='false')"></div>
+		
+		<p>
+			<span th:text="#{name}"></span>
+			<span th:text="${document.name}"></span>
+		</p>
+		<p>
+			<span th:text="#{date}"></span>
+			<span th:text="${{document.creationDate}}"></span>
+		</p>
+		<p>
+			<span th:text="#{summary}"></span>
+			<span th:text="${document.summary}"></span>
+		</p>
+		<p>
+			<span th:text="#{type}"></span>
+			<span th:text="${document.documentType}"></span>
+		</p>
+		<p>
+			<span th:text="#{subdirectory}"></span>
+			<span th:text="${subdirectory.name}"></span>
+		</p>
+	</body>
+</html>

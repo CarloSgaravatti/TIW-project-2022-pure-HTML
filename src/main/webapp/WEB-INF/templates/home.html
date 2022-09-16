@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${session.language}" th:lang="${lang}">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title></title>
+		<link rel="stylesheet" type="text/css" media="all" href="../css/mystyle.css" th:href="@{/css/mystyle.css}" />
+		<link rel="stylesheet" type="text/css" media="all" href="../css/homeStyle.css" th:href="@{/css/homeStyle.css}" />
+	</head>
+	<body th:with="isMoving = ${sourceSubdirectory != null && documentToMove != null}">
+		<div class = "header">
+			<h1 th:text = "#{title}"></h1>
+		</div>
+	
+		<div th:replace="WEB-INF/templates/fragments/navbar :: navbar(isHome='true')"></div>
+		
+		<span th:text = "#{welcomeMessage}"></span>
+		<span th:text="${session.user.username}"></span>
+		
+		<p th:if="${isMoving}">
+			<span th:text="#{movingDocument}"></span> <span th:text="${documentToMove.name}"></span> <span th:text="#{fromSubdirectory}"></span>
+			<span th:text="${sourceSubdirectory.name}"></span><span th:text="#{selectDestionation}"></span> 
+		</p>
+		
+		<th:block th:if="${not #lists.isEmpty(directoryTree) &&  not isMoving}">
+			<p th:text="#{homeMessage}"></p>
+			<form action = "GetDocumentByPath" method = "get" id = "pathForm">
+				<label th:text="#{getDocumentLabel}"></label>
+				<input type = "text" name = "path" id = "pathForm" required>
+				<input type = "submit" th:value ="#{getDocumentSubmit}">
+			</form>
+		</th:block>
+		
+		<p th:if="${#lists.isEmpty(directoryTree) && not isMoving}" th:text="#{noDirectoryMessage}"></p>
+		
+		<ul class = "directoryUl" th:with="id = ${isMoving} ? ${sourceSubdirectory.directoryId} : -1">
+			<th:block th:each="directory : ${directoryTree}">
+				<li class = "directoryLi"><span th:text="${directory.name}"></span></li>
+				<ul class = "subdirectoryUl">
+					<li class = "subdirectoryLi" th:each="subdirectory : ${directory.subdirectories}" th:with="isNotSourceSubdirectory = ${subdirectory.directoryId != id}">
+						<table id = "subdirectoryRow">
+							<tbody>
+								<tr>
+									<td id = "subdirectoryName">
+										<th:block th:if="${isNotSourceSubdirectory and not isMoving}">
+						                	<a href="documents.html"
+						                		th:href="@{/SelectSubdirectory(subdirectoryId=${subdirectory.directoryId})}">
+						        				<span th:text="${subdirectory.name}"></span>
+						        			</a>
+					        			</th:block>
+					        			<th:block th:if="${isNotSourceSubdirectory and isMoving}">
+						        			<form action = "MoveDocument" method = "post">
+					        					<input type="hidden" name="documentId" th:value="${documentToMove.documentId}">
+					        					<input type="hidden" name="subdirectoryId" th:value="${subdirectory.directoryId}">
+							        			<input type="submit" th:value="${subdirectory.name}">
+						        			</form>
+					        			</th:block>
+					        			<th:block th:unless="${isNotSourceSubdirectory}">
+					        				<mark><span th:text="${subdirectory.name}"></span></mark>
+					        			</th:block>
+				        			</td>
+				        			<td th:text="${subdirectory.creationDate}" id = "subdirectoryDate"></td>
+			        			</tr>
+		        			</tbody>
+	        			</table>
+					</li>
+				</ul>
+			</th:block>
+		</ul>
+	</body>
+</html>

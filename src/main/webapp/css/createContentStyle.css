@@ -1,0 +1,40 @@
+@charset "ISO-8859-1";
+
+.formsSection {
+	width: 100%;
+}
+
+.directoriesFormSection {
+	width: 40%;
+	float: left;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	margin-left: 5%;
+	margin-right: 5%;
+	box-sizing: border-box;
+}
+
+.directoryForm, .subdirectoryForm, .documentForm {
+	padding: 10px;
+	border: 3px solid green;
+	border-radius: 20px;
+	background-color: #eee;
+}
+
+.directoryForm {
+	margin-bottom: 30px;
+}
+
+input[type="text"], input[type="password"], input[type="email"], select, textarea {
+	background-color: white;
+}
+
+.documentForm {
+	margin-top: 55px;
+	margin-bottom: 30px;
+	margin-left: 5%;
+	margin-right: 5%;
+	width: 40%;
+	float: right;
+	box-sizing: border-box;
+}
